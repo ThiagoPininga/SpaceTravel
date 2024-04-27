@@ -17,7 +17,7 @@ public class Game1 : Game
     private float _starshipSpeed = 80f;
 
     //Variaveis de velocidade
-    private float _speed = 70f;
+    // private float _speed = 70f;
 
     //Variaveis de estado de jogo e menu
     public enum GameState{
@@ -26,10 +26,10 @@ public class Game1 : Game
         Credits,
         EndGame
     }
-
+    private double menuTimer = 0;
     private GameState _currentGameState = GameState.Menu;
     private int _menuSelected = 0;
-    private string[] _menuItems = {"Começar jogo", "Escolher Dificuldade" ,"Creditos", "Sair"};
+    private string[] _menuItems = {"Comecar jogo","Creditos", "Sair"};
     private SpriteFont _font;
 
     //Textura
@@ -52,7 +52,7 @@ public class Game1 : Game
     {
         // TODO: Add your initialization logic here
         _starshipPosition = new Vector2(50, GraphicsDevice.Viewport.Height / 2);
-
+        
         base.Initialize();
     }
 
@@ -78,27 +78,34 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-
+        
         if(_currentGameState == GameState.Menu){
-            if (_keyboard.IsKeyDown(Keys.W) && _menuSelected > 0){
-                _menuSelected--;
-            }
-            if (_keyboard.IsKeyDown(Keys.S) && _menuSelected < _menuItems.Length - 1){
-                _menuSelected++;
-            }
-            if (_keyboard.IsKeyDown(Keys.Enter)){
-                switch (_menuSelected){
-                    case 0: 
-                        _currentGameState = GameState.Active;
-                        break;
-                    case 1: 
-                        _currentGameState = GameState.Credits;
-                        break;
-                    case 2: 
-                        Exit();
-                        break;
+            menuTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            if(menuTimer > 1){
+                if (_keyboard.IsKeyDown(Keys.W) && _menuSelected > 0 && menuTimer > 1){
+                    _menuSelected--;
+                    menuTimer = 0;
                 }
+                if (_keyboard.IsKeyDown(Keys.S) && _menuSelected < _menuItems.Length - 1){
+                    _menuSelected++;
+                    menuTimer = 0;
+                }
+                if (_keyboard.IsKeyDown(Keys.Enter)){
+                    switch (_menuSelected){
+                        case 0: 
+                            _currentGameState = GameState.Active;
+                            break;
+                        case 1: 
+                            _currentGameState = GameState.Credits;
+                            break;
+                        case 2: 
+                            Exit();
+                            break;
+                    }
+                }
+                
             }
+            
         }else if (_currentGameState == GameState.Active){
             if(_keyboard.IsKeyDown(Keys.W)) {
 
@@ -116,7 +123,7 @@ public class Game1 : Game
                 }
             }
         }else if(_currentGameState == GameState.Credits){
-            if(_keyboard.IsKeyDown(Keys.Enter)){
+            if(_keyboard.IsKeyDown(Keys.Space)){
                 _currentGameState = GameState.Menu;
             }
         } else if(_currentGameState == GameState.EndGame){
@@ -140,11 +147,12 @@ public class Game1 : Game
                 Color color = i == _menuSelected ? Color.Yellow : Color.White;
                 
                 _spriteBatch.DrawString(_font, _menuItems[i], new Vector2(100, 100 + i * 20), color);
-
             }
         }else if(_currentGameState == GameState.Active){
             _spriteBatch.Draw(_starshipTexture, _starshipPosition, Color.White);
         } else if(_currentGameState == GameState.Credits){
+            _spriteBatch.DrawString(_font, "Creditos: Thiago Pininga Tavares", new Vector2(100, 100), Color.White);
+            _spriteBatch.DrawString(_font, "Aperte ESPACO para voltar para o menu", new Vector2(100, 200), Color.White);
 
         } else if(_currentGameState == GameState.EndGame){
             Exit();
