@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/404750__owlstorm__retro-video-game-sfx-collect-5.wav</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/711656__discofield__brick-crash.wav</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Estrela.png</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Foguete.png</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/GameFont.spritefont</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Meteoro.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File>Coletar.wav</File>
+    <File>Dano.wav</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
