@@ -79,7 +79,7 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
         
-        if(_currentGameState == GameState.Menu){
+        if(_currentGameState == GameState.Menu){//se estiver no menu
             menuTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if(menuTimer > 1){
                 if (_keyboard.IsKeyDown(Keys.W) && _menuSelected > 0 && menuTimer > 1){
@@ -89,8 +89,9 @@ public class Game1 : Game
                 if (_keyboard.IsKeyDown(Keys.S) && _menuSelected < _menuItems.Length - 1){
                     _menuSelected++;
                     menuTimer = 0;
-                }
-                if (_keyboard.IsKeyDown(Keys.Enter)){
+                }                
+            }
+            if (_keyboard.IsKeyDown(Keys.Enter)){
                     switch (_menuSelected){
                         case 0: 
                             _currentGameState = GameState.Active;
@@ -102,11 +103,9 @@ public class Game1 : Game
                             Exit();
                             break;
                     }
-                }
-                
             }
             
-        }else if (_currentGameState == GameState.Active){
+        }else if (_currentGameState == GameState.Active){// se estiver no jogo
             if(_keyboard.IsKeyDown(Keys.W)) {
 
                 _starshipPosition.Y -= _starshipSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -122,11 +121,11 @@ public class Game1 : Game
                     _starshipPosition.Y = GraphicsDevice.Viewport.Height - _starshipTexture.Height;
                 }
             }
-        }else if(_currentGameState == GameState.Credits){
+        }else if(_currentGameState == GameState.Credits){// creditos
             if(_keyboard.IsKeyDown(Keys.Space)){
                 _currentGameState = GameState.Menu;
             }
-        } else if(_currentGameState == GameState.EndGame){
+        } else if(_currentGameState == GameState.EndGame){// Fim de jogo
 
         }
 
