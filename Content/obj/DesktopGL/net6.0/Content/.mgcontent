@@ -6,7 +6,8 @@
   <SourceFiles>
     <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/404750__owlstorm__retro-video-game-sfx-collect-5.wav</File>
     <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/711656__discofield__brick-crash.wav</File>
-    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Estrela.png</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/EstrelaColetada.png</File>
+    <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/EstrelaPadrão.png</File>
     <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Foguete.png</File>
     <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/GameFont.spritefont</File>
     <File>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Meteoro.png</File>
@@ -14,6 +15,7 @@
   <DestFiles>
     <File>Coletar.wav</File>
     <File>Dano.wav</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

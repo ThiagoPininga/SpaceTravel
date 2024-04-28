@@ -25,7 +25,7 @@
 /processorParam:Quality=Best
 /build:711656__discofield__brick-crash.wav;Dano.wav
 
-#begin Estrela.png
+#begin EstrelaColetada.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +35,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Estrela.png
+/build:EstrelaColetada.png
+
+#begin EstrelaPadrão.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EstrelaPadrão.png
 
 #begin Foguete.png
 /importer:TextureImporter

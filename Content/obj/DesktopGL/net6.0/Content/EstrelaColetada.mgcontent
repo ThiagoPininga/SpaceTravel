@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Estrela.png</SourceFile>
-  <SourceTime>2024-04-27T15:32:29.4354128-03:00</SourceTime>
-  <DestFile>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/bin/DesktopGL/Estrela.xnb</DestFile>
-  <DestTime>2024-04-27T16:03:10.9100445-03:00</DestTime>
+  <SourceFile>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/EstrelaColetada.png</SourceFile>
+  <SourceTime>2024-04-28T14:43:41.2198072-03:00</SourceTime>
+  <DestFile>C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/bin/DesktopGL/Content/EstrelaColetada.xnb</DestFile>
+  <DestTime>2024-04-28T14:45:33.6464439-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T08:44:56-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

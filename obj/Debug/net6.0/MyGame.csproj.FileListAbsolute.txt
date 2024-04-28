@@ -26,9 +26,10 @@ C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\obj\Debug\net6.0\ref\MyGame.dl
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\obj\Debug\net6.0\MyGame.sourcelink.json
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\404750__owlstorm__retro-video-game-sfx-collect-5.xnb
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\711656__discofield__brick-crash.xnb
-C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\Estrela.xnb
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\Foguete.xnb
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\Meteoro.xnb
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\Coletar.xnb
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\Dano.xnb
 C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\GameFont.xnb
+C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\EstrelaColetada.xnb
+C:\Users\Thiago\OneDrive\DevPasta\MonoGame\MyGame\bin\Debug\net6.0\Content\EstrelaPadrão.xnb

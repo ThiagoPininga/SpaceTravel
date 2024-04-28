@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/GameFont.spritefont","C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/bin/DesktopGL/GameFont.xnb","FontDescriptionProcessor","SpriteFontContent",556,21535,0,1524908
+"C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Foguete.png","C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/bin/DesktopGL/Foguete.xnb","TextureProcessor","Texture2DContent",645,21365,0,0992607
+"C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/Meteoro.png","C:/Users/Thiago/OneDrive/DevPasta/MonoGame/MyGame/Content/bin/DesktopGL/Meteoro.xnb","TextureProcessor","Texture2DContent",474,17725,0,0043044

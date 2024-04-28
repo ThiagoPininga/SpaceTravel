@@ -11,13 +11,27 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private int _viewportWidth;
+
+
 
     //Variaveis do foguete
+
     private Vector2 _starshipPosition;
     private float _starshipSpeed = 80f;
 
     //Variaveis de velocidade
-    // private float _speed = 70f;
+    private float _speed = 200f;
+
+    //Variaveis das estrelas e contagens
+    private Vector2 _starPosition;
+    private int _collectedStars = 0;
+    private Random _random = new Random();
+    private Boolean _starCollected = false;
+
+    //Variaveis do meteoro
+    private Vector2 _meteorPosition;
+    private float _timeMeteor = 0; 
 
     //Variaveis de estado de jogo e menu
     public enum GameState{
@@ -35,7 +49,9 @@ public class Game1 : Game
     //Textura
     private Texture2D _starshipTexture;
     private Texture2D _meteorTexture;
-    private Texture2D _starTexture;
+    private Texture2D _starTexture;    
+    private Texture2D _starCollectedTexture;
+
 
     //Som
     private SoundEffect _soundCollect;
@@ -45,14 +61,17 @@ public class Game1 : Game
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+        IsMouseVisible = false;
     }
 
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
+
+        _viewportWidth = GraphicsDevice.Viewport.Width;
         _starshipPosition = new Vector2(50, GraphicsDevice.Viewport.Height / 2);
-        
+        _starPosition = new Vector2(_viewportWidth, 0);
+
         base.Initialize();
     }
 
@@ -61,7 +80,9 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
-        _starTexture = Content.Load<Texture2D>("estrela");
+        _starTexture = Content.Load<Texture2D>("estrelaPadrão");
+        _starCollectedTexture = Content.Load<Texture2D>("estrelaColetada");
+
         _starshipTexture = Content.Load<Texture2D>("foguete");
         _meteorTexture = Content.Load<Texture2D>("meteoro");
 
@@ -81,19 +102,21 @@ public class Game1 : Game
         
         if(_currentGameState == GameState.Menu){//se estiver no menu
             menuTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if(menuTimer > 1){
-                if (_keyboard.IsKeyDown(Keys.W) && _menuSelected > 0 && menuTimer > 1){
+
+            if(menuTimer > .5){
+                if (_keyboard.IsKeyDown(Keys.W) && _menuSelected > 0 ){// menu pra cima
                     _menuSelected--;
                     menuTimer = 0;
                 }
-                if (_keyboard.IsKeyDown(Keys.S) && _menuSelected < _menuItems.Length - 1){
+                if (_keyboard.IsKeyDown(Keys.S) && _menuSelected < _menuItems.Length - 1){// menu pra baixo
                     _menuSelected++;
                     menuTimer = 0;
                 }                
             }
-            if (_keyboard.IsKeyDown(Keys.Enter)){
+            if (_keyboard.IsKeyDown(Keys.Enter)){//selecionar
                     switch (_menuSelected){
                         case 0: 
+                            
                             _currentGameState = GameState.Active;
                             break;
                         case 1: 
@@ -106,6 +129,60 @@ public class Game1 : Game
             }
             
         }else if (_currentGameState == GameState.Active){// se estiver no jogo
+            //verificações de estrela
+            _starPosition.X -= _speed * (float)gameTime.ElapsedGameTime.TotalSeconds;           
+            
+            Rectangle starshipRectangle = new Rectangle((int)_starshipPosition.X, (int)_starshipPosition.Y, _starshipTexture.Width, _starshipTexture.Height);
+            Rectangle starRectangle = new Rectangle((int)_starPosition.X, (int)_starPosition.Y, _starTexture.Width, _starTexture.Height);
+            Rectangle meteorRectangle = new Rectangle((int)_meteorPosition.X, (int)_meteorPosition.Y, _meteorTexture.Width, _meteorTexture.Height);
+
+
+            if(_starPosition.X < - _starTexture.Width){
+                _starPosition = new Vector2(_viewportWidth, _random.Next(0, GraphicsDevice.Viewport.Height - _starTexture.Height));
+                _starCollected = false;
+            }
+
+            if (starshipRectangle.Intersects(starRectangle)) {
+                if(!_starCollected){
+                    _soundCollect.Play();
+                    _collectedStars++;
+                    if(_collectedStars == 40){
+                        _currentGameState = GameState.EndGame;
+                    }
+                }
+                
+                _starCollected = true;
+            }
+
+            if(_collectedStars == 8){
+                _speed = 250f;
+                _starshipSpeed = 100f;
+            } else if (_collectedStars == 18){
+                _speed = 350f;
+                _starshipSpeed = 120f;
+            } 
+            
+
+            //Verificação do meteoro
+            if(_timeMeteor < 3){
+                _timeMeteor += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _meteorPosition.Y = _viewportWidth; // não consegui colocar ele no initialize, não sei o porquê
+            }
+
+            if(_timeMeteor > 3){
+                _meteorPosition.X -= _speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if(_meteorPosition.X < - _meteorTexture.Width){
+                _meteorPosition = new Vector2(_viewportWidth, _random.Next(0, GraphicsDevice.Viewport.Height - _meteorTexture.Height));
+            }
+
+            if(starshipRectangle.Intersects(meteorRectangle)){
+                _soundCrash.Play();
+                _currentGameState = GameState.EndGame;
+            }
+
+            //verificações de teclado
             if(_keyboard.IsKeyDown(Keys.W)) {
 
                 _starshipPosition.Y -= _starshipSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -126,7 +203,13 @@ public class Game1 : Game
                 _currentGameState = GameState.Menu;
             }
         } else if(_currentGameState == GameState.EndGame){// Fim de jogo
-
+            if(_keyboard.IsKeyDown(Keys.Space)){
+                _currentGameState = GameState.Menu;
+                _meteorPosition.X = _viewportWidth;
+                _starPosition.X = _viewportWidth;
+                _timeMeteor = 0;
+                _collectedStars = 0;
+            }
         }
 
         base.Update(gameTime);
@@ -141,20 +224,38 @@ public class Game1 : Game
         _spriteBatch.Begin();
 
 
-        if(_currentGameState == GameState.Menu){
+        if(_currentGameState == GameState.Menu){// tela de menu
             for(int i = 0; i < _menuItems.Length; i++){
                 Color color = i == _menuSelected ? Color.Yellow : Color.White;
                 
                 _spriteBatch.DrawString(_font, _menuItems[i], new Vector2(100, 100 + i * 20), color);
             }
-        }else if(_currentGameState == GameState.Active){
+            _spriteBatch.DrawString(_font, "Aperte ENTER para selecionar", new Vector2(100, 300), Color.White);
+
+        }else if(_currentGameState == GameState.Active){ //Jogo ativo
             _spriteBatch.Draw(_starshipTexture, _starshipPosition, Color.White);
-        } else if(_currentGameState == GameState.Credits){
+
+            if(!_starCollected){
+                _spriteBatch.Draw(_starTexture, _starPosition, Color.White);
+            } else{
+                _spriteBatch.Draw(_starCollectedTexture, _starPosition, Color.White);
+            }
+
+            _spriteBatch.Draw(_meteorTexture, _meteorPosition, Color.Wheat);
+
+            _spriteBatch.DrawString(_font, _collectedStars.ToString(), new Vector2(_viewportWidth / 2, 20), Color.White);
+        } else if(_currentGameState == GameState.Credits){//Créditos 
             _spriteBatch.DrawString(_font, "Creditos: Thiago Pininga Tavares", new Vector2(100, 100), Color.White);
             _spriteBatch.DrawString(_font, "Aperte ESPACO para voltar para o menu", new Vector2(100, 200), Color.White);
 
-        } else if(_currentGameState == GameState.EndGame){
-            Exit();
+        } else if(_currentGameState == GameState.EndGame){// Fim de jogo
+            if(_collectedStars == 40){
+                _spriteBatch.DrawString(_font, "Parabens, voce venceu!", new Vector2(100, 100), Color.White);
+            } else{
+                _spriteBatch.DrawString(_font, "Voce perdeu", new Vector2(100, 100), Color.White);
+            }
+            _spriteBatch.DrawString(_font, "Aperte ESPACO para voltar ao menu", new Vector2(100, 200), Color.White);
+
         }
         _spriteBatch.End();
 
